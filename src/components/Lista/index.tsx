@@ -5,14 +5,15 @@ import style from './Lista.module.scss';
 
 interface Props {
   tarefas: ITarefa[],
-  selecionaTarefa: (tarefaSelecionada: ITarefa) => void 
+  selecionaTarefa?: (tarefaSelecionada: ITarefa) => void,
+  tipoLista: string
 }
 
 
-function Lista({ tarefas, selecionaTarefa }: Props) {
+function Lista({ tarefas, selecionaTarefa, tipoLista }: Props) {
   return (
-    <aside className={style.listaTarefas}>
-      <h2> Estudos do dia </h2>
+    <aside className={style.listaTarefas +" "+ tipoLista}>
+      <h2>{tipoLista === "ongoing" ? "A fazer" : "Feitas"}</h2>
       <ul>
         {tarefas.map(item => (
           <Item

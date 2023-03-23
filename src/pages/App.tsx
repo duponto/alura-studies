@@ -7,7 +7,8 @@ import style from './App.module.scss';
 
 function App() {
   const [tarefas, setTarefas] = useState<ITarefa[]>([]);
-  const [selecionado, setSelecionado] = useState<ITarefa>();
+  const [tarefasDone, setTarefasDone] = useState<ITarefa[]>([]);
+  const [tarefaSelecionada, setSelecionado] = useState<ITarefa>();
 
   function selecionaTarefa(tarefaSelecionada: ITarefa) {
     setSelecionado(tarefaSelecionada);
@@ -18,18 +19,22 @@ function App() {
   }
 
   function finalizarTarefa() {
-    if(selecionado) {
+    if(tarefaSelecionada) {
+      setTarefasDone([...tarefasDone, {...tarefaSelecionada, selecionado: false, completado:true}]);
+      setTarefas(tarefas.filter(x => x.id !== tarefaSelecionada.id));
       setSelecionado(undefined);
-      setTarefas(tarefasAnteriores => tarefasAnteriores.map(tarefa => {
-        if(tarefa.id === selecionado.id) {
-          return {
-            ...tarefa,
-            selecionado: false,
-            completado: true
-          }
-        }
-        return tarefa;
-      }))
+
+      // setTarefas(tarefasAnteriores => tarefasAnteriores.map(tarefa => {
+      //   if(tarefa.id === selecionado.id) {
+      //     return {
+      //       ...tarefa,
+      //       selecionado: false,
+      //       completado: true
+      //     }
+      //   }
+      //   return tarefa;
+      // }))
+
     }
   }
 
@@ -39,9 +44,14 @@ function App() {
       <Lista
         tarefas={tarefas}
         selecionaTarefa={selecionaTarefa}
+        tipoLista='ongoing'
+      />
+      <Lista
+        tarefas={tarefasDone}
+        tipoLista='done'
       />
       <Cronometro
-        selecionado={selecionado}
+        tarefaSelecionada={tarefaSelecionada}
         finalizarTarefa={finalizarTarefa}
       />
     </div>

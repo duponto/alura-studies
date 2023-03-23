@@ -1,0 +1,3 @@
+botao stop;
+botao forceComplete;
+adicionar nome da task em cima do cron;
