@@ -10,7 +10,7 @@ interface Props {
 
 function Formulario({ setTarefas }: Props) {
   const [tarefa, setTarefa] = useState("");
-  const [tempo, setTempo] = useState("00:00");
+  const [tempo, setTempo] = useState("00:00:00");
   function adicionarTarefa(evento: React.FormEvent<HTMLFormElement>) {
     evento.preventDefault();
     setTarefas(tarefasAntigas => 
@@ -33,7 +33,7 @@ function Formulario({ setTarefas }: Props) {
     <form className={style.novaTarefa} onSubmit={adicionarTarefa}>
       <div className={style.inputContainer}>
         <label htmlFor="tarefa">
-          Adicione um novo estudo
+          Adicione uma nova tarefa
         </label>
         <input
           type="text"
@@ -57,7 +57,7 @@ function Formulario({ setTarefas }: Props) {
           onChange={evento => setTempo(evento.target.value)}
           id="tempo"
           min="00:00:00"
-          max="01:30:00"
+          max="01:40:00"
           required
         />
       </div>

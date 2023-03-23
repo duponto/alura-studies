@@ -1,5 +1,12 @@
 .listaTarefas {
-  grid-area: tarefas;
+  
+  .ongoing{
+    grid-area: tarefasOngoing;
+  }
+  .done{
+    grid-area: tarefasDone;
+  }
+
   height: 100%;
 
   h2 {
